@@ -1,0 +1,14 @@
+name: ecr ecs deploy
+on:
+    push:
+      branches: [main]
+permissions:
+    contents: read
+    id-token: write
+
+jobs:
+  ecr-build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Check out code
+          uses: actions/checkout@v4
