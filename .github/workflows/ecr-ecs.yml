@@ -33,5 +33,5 @@ jobs:
            context: .
            push: true
            tags: |
-             ${{ vars.ECR_REPO }}/IMAGE_NAME:latest
-             ${{ vars.ECR_REPO }}/IMAGE_NAME:${{ github.run_number }}
+             ${{ vars.ECR_REPO }}/${{ vars.IMAGE_NAME }}:latest
+             ${{ vars.ECR_REPO }}/${{ vars.IMAGE_NAME }}:${{ github.run_number }}
