@@ -9,7 +9,7 @@ permissions:
 env:
   AWS_REGION: us-east-1
   ECR_REPO: 396608766727.dkr.ecr.us-east-1.amazonaws.com/testecr
-  IMAGE_NAME: femitest
+  
 jobs:
   ecr-build-and-deploy:
     runs-on: ubuntu-latest
@@ -33,5 +33,5 @@ jobs:
            context: .
            push: true
            tags: |
-             ${{ vars.ECR_REPO }}/${{ vars.IMAGE_NAME }}:latest
-             ${{ vars.ECR_REPO }}/${{ vars.IMAGE_NAME }}:${{ github.run_number }}
+             ${{ vars.ECR_REPO }}:latest
+             ${{ vars.ECR_REPO }}:${{ github.run_number }}
