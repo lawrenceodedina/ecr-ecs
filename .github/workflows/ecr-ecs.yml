@@ -7,8 +7,9 @@ permissions:
     id-token: write
 
 env:
-  AWS_REGION: us-east-1
-  ECR_REPO: 396608766727.dkr.ecr.us-east-1.amazonaws.com/testecr
+  REGION: ${{ secrets.AWS_REGION }}
+  ECR_REPO: ${{ secrets.AWS_ECR_REPO }}
+  ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
   
 jobs:
   ecr-build-and-deploy:
@@ -20,8 +21,8 @@ jobs:
         - name: configure aws credentials
           uses: aws-actions/configure-aws-credentials@v4
           with:
-            aws_region: ${{ vars.AWS_REGION }}
-            role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+            aws_region: ${{ env.REGION }}
+            role-to-assume: ${{ env.ROLE_ARN }}
         
         - name: Login to Amazon ECR
           id: login-ecr
@@ -33,5 +34,5 @@ jobs:
            context: .
            push: true
            tags: |
-             ${{ vars.ECR_REPO }}:latest
-             ${{ vars.ECR_REPO }}:${{ github.run_number }}
+             ${{ env.ECR_REPO }}:latest
+             ${{ env.ECR_REPO }}:${{ github.run_number }}
