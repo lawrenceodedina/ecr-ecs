@@ -39,12 +39,12 @@ jobs:
            tags: |
              ${{ env.ECR_REPO }}:latest
              ${{ env.ECR_REPO }}:${{ github.run_number }}
-           outputs: type=docker,dest=${{ runner.temp }}/${{ env.ECR_REPO }}.tar
+           outputs: type=docker,dest=${{ runner.temp }}
         
         - name: Upload artifact
           uses: actions/upload-artifact@v4
           with:
-            name: myimage
+            name: image
             path: ${{ runner.temp }}/myimage.tar
 
   use:
@@ -54,7 +54,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: myimage
+          name: image
           path: ${{ runner.temp }}
 
       - name: Load image
