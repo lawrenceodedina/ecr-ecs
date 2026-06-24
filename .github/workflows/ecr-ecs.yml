@@ -101,12 +101,6 @@ jobs:
         with:
           aws-region: ${{ env.REGION }}
           role-to-assume: ${{ env.ROLE_ARN }}
-
-      - name: Download image
-        uses: actions/download-artifact@v4
-        with:
-          name: images
-          path: ${{ runner.temp }}
       
       - name: Modify task definition
         id: task-def
