@@ -69,5 +69,6 @@ jobs:
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
+          scanners: 'vuln,secret'
           severity: 'CRITICAL,HIGH'
       
