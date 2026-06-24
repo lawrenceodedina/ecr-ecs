@@ -47,7 +47,7 @@ jobs:
             name: images
             path: ${{ runner.temp }}/images.tar
 
-  use:
+  scan:
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -61,3 +61,14 @@ jobs:
         run: |
           docker load --input ${{ runner.temp }}/images.tar
           docker images
+
+      - name: scan image
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: '${{ env.ECR_REPO }}:${{ github.run_number }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+      
