@@ -110,7 +110,7 @@ jobs:
       
       - name: load image
         run: |
-          docker load ${{ runner.temp }}/images.tar
+          docker load --input ${{ runner.temp }}/images.tar
       
       - name: Modify task definition
         id: task-def
